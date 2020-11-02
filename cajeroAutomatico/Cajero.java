@@ -32,7 +32,7 @@ class Cajero {
 
     void consignar(String cedula, double montoConsignacion) {
         int i;
-        try {
+        try {//Se busca el índice correspondiente a la cédula ingresada.
             i = getIndice(cedula);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -60,11 +60,9 @@ class Cajero {
         }
     }
 
-    void transferir(String cedulaOut, String cedulaIn,
-    double montoTransferencia) {
+    void transferir(String cedulaOut, String cedulaIn, double montoTransferencia) {
         int iOut, iIn;
         double nuevoSaldoOut, nuevoSaldoIn;
-
         try {//Se busca el índice del cliente que envía
             iOut = getIndice(cedulaOut);
         } catch (Exception e) {
@@ -73,13 +71,12 @@ class Cajero {
         }
         if (clientes.get(iOut).getSaldo() < montoTransferencia) {
             System.out.println(
-            "\n"+
-            "¡ATENCIÓN!\n"+
-            "Saldo insuficiente. No se puede realizar la transferencia.\n");
+                "\n"+
+                "¡ATENCIÓN!\n"+
+                "Saldo insuficiente. No se puede realizar la transferencia.\n");
             return;
         }
         nuevoSaldoOut = clientes.get(iOut).getSaldo() - montoTransferencia;
-
         try {//Se busca el índice del cliente que recibe
             iIn = getIndice(cedulaIn);
         } catch (Exception e) {
@@ -87,15 +84,14 @@ class Cajero {
             return;
         }
         nuevoSaldoIn = clientes.get(iIn).getSaldo() + montoTransferencia;
-
         System.out.print(
-        "\n¡ATENCIÓN!\n"+
-        "Se va a transferir $"+montoTransferencia+" del cliente:\n"+
-        "    "+clientes.get(iOut).getNombre()+"\n"+
-        "al cliente:\n"+
-        "    "+clientes.get(iIn).getNombre()+"\n\n"+
-        "¿Desea continuar? S/N ");
-        String respuesta = entrada.next().toLowerCase();
+            "\n¡ATENCIÓN!\n"+
+            "Se va a transferir $"+montoTransferencia+" del cliente:\n"+
+            "    "+clientes.get(iOut).getNombre()+"\n"+
+            "al cliente:\n"+
+            "    "+clientes.get(iIn).getNombre()+"\n\n"+
+            "¿Desea continuar? S/N ");
+        String respuesta = entrada.nextLine().toLowerCase();
         if (respuesta.equals("s")) {
             clientes.get(iOut).setSaldo(nuevoSaldoOut);
             clientes.get(iIn).setSaldo(nuevoSaldoIn);
@@ -105,25 +101,25 @@ class Cajero {
             return;
         } else {
             System.out.println(
-            "\nDebe ingresar S o N.\n"+
-            "No se realizó la transferencia.\n");
+                "\nDebe ingresar S o N.\n"+
+                "No se realizó la transferencia.\n");
             return;
         }
     }
 
     void mostrarSaldoCliente(String cedula) {
         int i;
-        try {
+        try {//Se busca el índice correspondiente a la cédula ingresada.
             i = getIndice(cedula);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return;
         }
         System.out.println(
-        "\n"+
-        "    Cliente: "+clientes.get(i).getNombre()+"\n"+
-        "    Saldo: $"+clientes.get(i).getSaldo()+
-        "\n");
+            "\n"+
+            "    Cliente: "+clientes.get(i).getNombre()+"\n"+
+            "    Saldo: $"+clientes.get(i).getSaldo()+
+            "\n");
     }
 
     void mostrarClientes() {
@@ -132,38 +128,38 @@ class Cajero {
         System.out.println(s);
         for (int i = 0; i < clientes.size(); i++) {
             s = String.format(
-            formato,
-            clientes.get(i).getCedula(),
-            clientes.get(i).getNombre(),
-            clientes.get(i).getSaldo());
+                formato,
+                clientes.get(i).getCedula(),
+                clientes.get(i).getNombre(),
+                clientes.get(i).getSaldo());
             System.out.println(s);
         }
     }
 
     void eliminarCliente(String cedula) {
         int i;
-        try {
+        try {//Se busca el índice correspondiente a la cédula ingresada.
             i = getIndice(cedula);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return;
         }
         System.out.print(
-        "\n¡ATENCIÓN!\n"+
-        "El cliente seleccionado para eliminar es: "+
-        "    "+clientes.get(i).getNombre()+"\n"+
-        "\n¿Desea continuar? S/N ");
-        String respuesta = entrada.next().toLowerCase();
+            "\n¡ATENCIÓN!\n"+
+            "El cliente seleccionado para eliminar es: "+
+            "    "+clientes.get(i).getNombre()+"\n"+
+            "\n¿Desea continuar? S/N ");
+        String respuesta = entrada.nextLine().toLowerCase();
         if (respuesta.equals("s")) {
             clientes.remove(i);
-            System.out.println("\nUn cliente ha sido eliminado con éxito.\n");
+            System.out.println("\nSe eliminó un cliente.\n");
         } else if (respuesta.equals("n")) {
             System.out.println("\nNo se eliminó ningún cliente.\n");
             return;
         } else {
             System.out.println(
-            "\nDebe ingresar S o N.\n"+
-            "No se eliminó ningún cliente.\n");
+                "\nDebe ingresar S o N.\n"+
+                "No se eliminó ningún cliente.\n");
             return;
         }
     }
