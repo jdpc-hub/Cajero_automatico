@@ -21,8 +21,7 @@ class Cajero {
         //Se verifica que el cliente no exista
         for (int i = 0; i < clientes.size(); i++) {
             if (nuevoCliente.getCedula().equals(clientes.get(i).getCedula())) {
-                System.out.println(
-                "\nYa existe un cliente con este número de cédula.\n");
+                System.out.println("\nYa existe un cliente con este número de cédula.\n");
                 return;
             }
         }
@@ -40,22 +39,21 @@ class Cajero {
         }
         double nuevoSaldo = clientes.get(i).getSaldo() + montoConsignacion;
         System.out.print(
-        "\n¡ATENCIÓN!\n"+
-        "Se va a consignar $"+montoConsignacion+" al cliente:\n"+
-        "    "+clientes.get(i).getNombre()+".\n\n"+
-        "¿Desea continuar? S/N ");
+            "\n¡ATENCIÓN!\n"+
+            "Se va a consignar $"+montoConsignacion+" al cliente:\n"+
+            "    "+clientes.get(i).getNombre()+".\n\n"+
+            "¿Desea continuar? S/N ");
         String respuesta = entrada.next().toLowerCase();
         if (respuesta.equals("s")) {
             clientes.get(i).setSaldo(nuevoSaldo);
-            System.out.println(
-            "\nLa consignación ha sido realizada con éxito.\n");
+            System.out.println("\nLa consignación ha sido realizada con éxito.\n");
         } else if (respuesta.equals("n")) {
             System.out.println("\nNo se realizó la consignación.\n");
             return;
         } else {
             System.out.println(
-            "\nDebe ingresar S o N.\n"+
-            "No se realizó la consignación.\n");
+                "\nDebe ingresar S o N.\n"+
+                "No se realizó la consignación.\n");
             return;
         }
     }
